@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"ashwanthkumar/slack-go-webhook"
 
 	fsnotify "gopkg.in/fsnotify.v1"
 )
@@ -17,8 +16,6 @@ var webhook = flag.String("webhook-url", "", "the url to send a request to when 
 var webhookMethod = flag.String("webhook-method", "POST", "the HTTP method url to use to send the webhook")
 var webhookUser = flag.String("webhook-user", "", "username for the webhook")
 var webhookPasswd = flag.String("webhook-pass", "", "password for the webhook")
-var slackWebhook = flag.String("slack-webhook", "", "slack webhook")
-var slackChannel = flag.String("slack-channel", "", "slack channel to post message to")
 var webhookStatusCode = flag.Int("webhook-status-code", 200, "the HTTP status code indicating successful triggering of reload")
 
 func main() {
