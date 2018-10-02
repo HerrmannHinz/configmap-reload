@@ -50,8 +50,8 @@ func main() {
 				if event.Op&fsnotify.Create == fsnotify.Create {
 					if filepath.Base(event.Name) == "..data" {
 						log.Println("config map updated")
-						log.Println("waiting for 30 seconds to ensure it really is persisted.")
-						time.Sleep(30 * time.Second)
+						log.Println("waiting for 60 seconds (to ensure map is persisted)")
+						time.Sleep(60 * time.Second)
 						log.Println("triggering webhook now.")
 						req, err := http.NewRequest(*webhookMethod, *webhook, nil)
 						if err != nil {
