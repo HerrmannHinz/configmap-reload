@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"github.com/ashwanthkumar/slack-go-webhook"
+	"ashwanthkumar/slack-go-webhook"
 
 	fsnotify "gopkg.in/fsnotify.v1"
 )
