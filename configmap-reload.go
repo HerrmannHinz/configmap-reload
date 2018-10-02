@@ -14,8 +14,8 @@ import (
 var volumeDirs volumeDirsFlag
 var webhook = flag.String("webhook-url", "", "the url to send a request to when the specified config map volume directory has been updated")
 var webhookMethod = flag.String("webhook-method", "POST", "the HTTP method url to use to send the webhook")
-var webhookUser = flag.String("webhook-user", "DEFAULT_USER", "username for the webhook")
-var webhookPasswd = flag.String("webhook-pass", "DEFAULT_PASS", "password for the webhook")
+var webhookUser = flag.String("webhook-user", "", "username for the webhook")
+var webhookPasswd = flag.String("webhook-pass", "", "password for the webhook")
 var webhookStatusCode = flag.Int("webhook-status-code", 200, "the HTTP status code indicating successful triggering of reload")
 
 func main() {
@@ -54,7 +54,7 @@ func main() {
 							log.Println("error:", err)
 							continue
 						}
-						req.SetBasicAuth(webhookUser, webhookPasswd)
+						req.SetBasicAuth(*webhookUser, *webhookPasswd)
 						resp, err := http.DefaultClient.Do(req)
 						if err != nil {
 							log.Println("error:", err)
