@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configmap-reloader-jenkins-non-prod
+  namespace: jenkins-non-prod
+  labels:
+    app: configmap-reloader-jenkins-non-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configmap-reloader-jenkins-non-prod
+  template:
+    metadata:
+      labels:
+        app: configmap-reloader-jenkins-non-prod
+    spec:
+      containers:
+      - name: configmap-reloader-jenkins-non-prod
+        image: quay.io/mercedesbenzio/configmap-reload:master
+        imagePullPolicy: Always
+        command:
+        - ./configmap-reload
+        - -volume-dir=/var/jenkins_home/casc_configs/
+        - -webhook-url=https://your.webook.url.domain.io/configuration-as-code/reload
+        - -webhook-user=<WEBHOOK_USER>
+        - -webhook-pass=<WEBHOOK_PASS>
+        - -webhook-method=POST
+        volumeMounts:
+        - name: casc-config
+          mountPath: /var/jenkins_home/casc_configs
+          readOnly: true
+      volumes:
+      - name: casc-config
+        configMap:
+          name: jenkins-casc-config
