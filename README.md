@@ -25,6 +25,11 @@ Usage of ./out/configmap-reload:
         the HTTP status code indicating successful triggering of reload (default 200)
   -webhook-url string
         the url to send a request to when the specified config map volume directory has been updated
+  -webhook-user string
+         basic auth username
+  -webhook-pass string
+         basic auth password
+
 ```
 
 ### License
